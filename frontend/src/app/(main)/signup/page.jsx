@@ -4,6 +4,7 @@ import axios from 'axios';
 import { useFormik } from 'formik';
 import toast from 'react-hot-toast';
 import * as Yup from 'yup';
+import { useRouter } from 'next/navigation';
 
 const SignupSchema = Yup.object().shape({
   name: Yup.string()
@@ -24,6 +25,8 @@ const SignupSchema = Yup.object().shape({
 
 const Signup = () => {
 
+  const router = useRouter();
+
   const signupForm = useFormik({
     initialValues: {
       name: '',
@@ -31,16 +34,19 @@ const Signup = () => {
       password: '',
       confirmPassword: ''
     },
-    onSubmit: (values) => {
-      console.log(values);
+    onSubmit: async (values, { resetForm, setSubmitting }) => {
       // send values to backend
-
-      axios.post('http://localhost:5000/user/add', values)
-        .then((result) => {
+      
+      await axios.post('http://localhost:5000/user/add', values)
+      .then((result) => {
+          console.log(result.data);
           toast.success('User registered successfully');
+          resetForm();
+          router.push('/login')
         }).catch((err) => {
           console.log(err);
           toast.error('Something went wrong');
+          setSubmitting(false)
         });
 
     },
@@ -106,8 +112,7 @@ const Signup = () => {
                 <div>
                   <label
                     htmlFor="name"
-                    className="block text-sm mb-2 dark:text-white"
-                  >
+                    className="block text-sm mb-2 dark:text-white">
                     Full Name
                   </label>
                   <div className="relative">
@@ -145,6 +150,7 @@ const Signup = () => {
 
                 </div>
                 {/* End Form Group */}
+                
                 {/* Form Group */}
                 <div>
                   <label
