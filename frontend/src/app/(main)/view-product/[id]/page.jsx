@@ -2,12 +2,14 @@
 import React, { useEffect, useState } from 'react';
 import { useRouter } from 'next/navigation';
 import axios from 'axios';
+import useCartContext from '@/context/CartContext';
 
 const ViewProduct = ({ params }) => {
   const { id } = params; // Extract the product ID from the route parameters
   const [product, setProduct] = useState(null);
   const [error, setError] = useState('');
   const router = useRouter();
+  const { addItemToCart, isInCart, removeItemFromCart } = useCartContext();
 
   useEffect(() => {
     const fetchProduct = async () => {
@@ -47,12 +49,29 @@ const ViewProduct = ({ params }) => {
         <p className="text-gray-600 mb-2">Category: {product.category}</p>
         <p className="text-gray-600 mb-2">Stock: {product.stock}</p>
         <p className="text-gray-600 mb-6">Size: {product.size}</p>
-        <button
-          onClick={() => router.back()}
-          className="bg-blue-500 text-white py-2 px-4 rounded-md hover:bg-blue-600 focus:outline-none focus:ring-2 focus:ring-blue-500 focus:ring-offset-2"
-        >
-          Go Back
-        </button>
+        <div className="flex space-x-4">
+          <button
+            onClick={() => router.back()}
+            className="bg-blue-500 text-white py-2 px-4 rounded-md hover:bg-blue-600 focus:outline-none focus:ring-2 focus:ring-blue-500 focus:ring-offset-2"
+          >
+            Go Back
+          </button>
+          {isInCart(product) ? (
+            <button 
+              onClick={() => removeItemFromCart(product)}
+              className="bg-red-600 text-white py-2 px-4 rounded-md hover:bg-red-700 focus:outline-none focus:ring-2 focus:ring-red-500 focus:ring-offset-2"
+            >
+              Remove from Cart
+            </button>
+          ) : (
+            <button 
+              onClick={() => addItemToCart({...product, pprice: product.price})}
+              className="bg-green-600 text-white py-2 px-4 rounded-md hover:bg-green-700 focus:outline-none focus:ring-2 focus:ring-green-500 focus:ring-offset-2"
+            >
+              Add to Cart
+            </button>
+          )}
+        </div>
       </div>
     </div>
   );

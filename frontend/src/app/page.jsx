@@ -4,7 +4,6 @@ import Navbar from './(main)/Navbar'
 const Home = () => {
   return (
     <div>
-
       <Navbar />
     </div>
   )

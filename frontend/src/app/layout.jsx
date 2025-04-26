@@ -4,6 +4,7 @@ import "./globals.css";
 import PrelineScript from "@/components/PrelineScript";
 import Navbar from "@/app/(main)/Navbar";
 import Footer from "@/components/Footer";
+import { CartProvider } from "@/context/CartContext";
 
 const geistSans = Geist({
   variable: "--font-geist-sans",
@@ -28,9 +29,11 @@ export default function RootLayout({ children }) {
       >
         <PrelineScript />
         <Toaster />
-        {/* <Navbar /> */}
-        {children}
-        <Footer/>
+        <CartProvider>
+          {/* <Navbar /> */}
+          {children}
+          <Footer />
+        </CartProvider>
       </body>
     </html>
   );

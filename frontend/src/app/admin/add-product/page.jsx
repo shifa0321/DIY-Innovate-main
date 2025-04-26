@@ -27,6 +27,29 @@ const AddProduct = () => {
     },
   });
 
+  const uploadFile = (e) => {
+    const file = e.target.files[0];
+    if (!file) {
+        return toast.error('Please select a file');
+    }
+    console.log(file);
+
+    const fd = new FormData();
+    fd.append('file', file);
+    fd.append('upload_preset', 'hoodhogan');
+    fd.append('cloud_name', 'ddsnnqpbv');
+
+    axios.post('https://api.cloudinary.com/v1_1/ddsnnqpbv/image/upload', fd)
+        .then((result) => {
+            console.log(result.data.url);
+            signForm.setFieldValue('imageUrl', result.data.url);
+            toast.success('File uploaded successfully!');
+        }).catch((err) => {
+            console.log(err);
+            toast.error('File upload failed!');
+        });
+};
+
   return (
     <div className="flex justify-center items-center min-h-screen bg-gray-100">
       <div className="bg-white shadow-md rounded-lg p-8 w-full max-w-lg">
@@ -117,6 +140,7 @@ const AddProduct = () => {
             </label>
             <input
               type="file"
+              onChange={uploadFile}
               required
               className="mt-1 block w-full border border-gray-300 rounded-md shadow-sm focus:ring-blue-500 focus:border-blue-500 sm:text-sm p-2"
             />

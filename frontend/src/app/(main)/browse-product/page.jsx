@@ -2,15 +2,19 @@
 import React, { useEffect, useState } from 'react';
 import axios from 'axios';
 import Link from 'next/link';
+import useCartContext from '@/context/CartContext';
 
 const BrowseProduct = () => {
   const [products, setProducts] = useState([]);
   const [error, setError] = useState('');
+  const { addItemToCart, isInCart, removeItemFromCart } = useCartContext();
 
   useEffect(() => {
     const fetchProducts = async () => {
       try {
         const response = await axios.get(`${process.env.NEXT_PUBLIC_API_URL}/product/getall`);
+        console.log(response.data);
+        
         setProducts(response.data);
       } catch (err) {
         setError('Failed to fetch products');
@@ -42,7 +46,26 @@ const BrowseProduct = () => {
               <p className="text-gray-500 text-sm">Category: {product.category}</p>
               <p className="text-gray-500 text-sm">Stock: {product.stock}</p>
               <p className="text-gray-500 text-sm">Size: {product.size}</p>
-              <Link href={`view-product/${product._id}`} className="px-4 py-2 rounded-lg bg-blue-700"> View Product</Link>
+              <div className="flex gap-2 mt-3">
+                <Link href={`view-product/${product._id}`} className="px-4 py-2 rounded-lg bg-blue-700 text-white">
+                  View Product
+                </Link>
+                {isInCart(product) ? (
+                  <button 
+                    onClick={() => removeItemFromCart(product)}
+                    className="px-4 py-2 rounded-lg bg-red-600 text-white"
+                  >
+                    Remove from Cart
+                  </button>
+                ) : (
+                  <button 
+                    onClick={() => addItemToCart({...product, pprice: product.price})}
+                    className="px-4 py-2 rounded-lg bg-green-600 text-white"
+                  >
+                    Add to Cart
+                  </button>
+                )}
+              </div>
             </div>
           ))
         ) : (
