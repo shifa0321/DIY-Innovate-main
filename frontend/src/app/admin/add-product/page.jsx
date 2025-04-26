@@ -36,10 +36,10 @@ const AddProduct = () => {
 
     const fd = new FormData();
     fd.append('file', file);
-    fd.append('upload_preset', 'hoodhogan');
-    fd.append('cloud_name', 'ddsnnqpbv');
+    fd.append('upload_preset', 'mypreset');
+    fd.append('cloud_name', 'drxbriqk4');
 
-    axios.post('https://api.cloudinary.com/v1_1/ddsnnqpbv/image/upload', fd)
+    axios.post('https://api.cloudinary.com/v1_1/drxbriqk4/image/upload', fd)
         .then((result) => {
             console.log(result.data.url);
             signForm.setFieldValue('imageUrl', result.data.url);
