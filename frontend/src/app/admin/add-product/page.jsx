@@ -2,6 +2,7 @@
 import axios from 'axios';
 import { useFormik } from 'formik';
 import React from 'react';
+import toast from 'react-hot-toast';
 
 const AddProduct = () => {
   const addProduct = useFormik({
@@ -15,8 +16,10 @@ const AddProduct = () => {
       imageUrl: '',
     },
     onSubmit: (values, { resetForm }) => {
+      console.log(values);
+      
       axios
-        .post('http://localhost:5000/product/add', values)
+        .post(`${process.env.NEXT_PUBLIC_API_URL}/product/add`, values)
         .then((result) => {
           console.log(result.data);
           resetForm();
@@ -42,7 +45,7 @@ const AddProduct = () => {
     axios.post('https://api.cloudinary.com/v1_1/drxbriqk4/image/upload', fd)
         .then((result) => {
             console.log(result.data.url);
-            signForm.setFieldValue('imageUrl', result.data.url);
+            addProduct.setFieldValue('imageUrl', result.data.url);
             toast.success('File uploaded successfully!');
         }).catch((err) => {
             console.log(err);
