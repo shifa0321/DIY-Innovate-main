@@ -193,7 +193,7 @@ const Navbar = () => {
             <Link href="/browse-product" className="text-gray-700 hover:text-indigo-600 transition duration-200">Browse</Link>
           </li>
           <li>
-            <a href="#" className="text-gray-700 hover:text-indigo-600 transition duration-200">Shop</a>
+            <a href="/user/checkout" className="text-gray-700 hover:text-indigo-600 transition duration-200">Shop</a>
           </li>
         </ul>
         <div className="flex space-x-4">

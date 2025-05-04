@@ -23,9 +23,9 @@ const Navbar = () => {
               <Link href="/user/orders" className="text-gray-700 hover:text-indigo-600 transition duration-200">
                 My Orders
               </Link>
-              <Link href="/user/wishlist" className="text-gray-700 hover:text-indigo-600 transition duration-200">
+              {/* <Link href="/user/wishlist" className="text-gray-700 hover:text-indigo-600 transition duration-200">
                 Wishlist
-              </Link>
+              </Link> */}
             </div>
           </div>
 
@@ -33,7 +33,7 @@ const Navbar = () => {
           <div className="flex items-center space-x-6">
             {/* Cart */}
             <Link 
-              href="/cart" 
+              href="/user/cart" 
               className="relative text-gray-700 hover:text-indigo-600 transition duration-200"
             >
               <svg xmlns="http://www.w3.org/2000/svg" className="h-6 w-6" fill="none" viewBox="0 0 24 24" stroke="currentColor">

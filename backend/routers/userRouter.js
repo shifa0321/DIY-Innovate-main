@@ -1,31 +1,32 @@
 const express = require('express');
 const Model = require('../models/UserModel')
 const router = express.Router();
+const jwt = require('jsonwebtoken')
 
 //add
-router.post('/add',(req, res) => {
+router.post('/add', (req, res) => {
     console.log(req.body);
     new Model(req.body).save()
-    .then((result) => {
-        console.log('res from user add');
-        res.status(200).json(result)
-    }).catch((err) => {
-        res.status(500).json(err);
-    });
+        .then((result) => {
+            console.log('res from user add');
+            res.status(200).json(result)
+        }).catch((err) => {
+            res.status(500).json(err);
+        });
 });
 //getall
-router.get('/getall',(req, res) => {
+router.get('/getall', (req, res) => {
     console.log(req.body);
     Model.find()
-    .then((result) => {
-        console.log('res from user add');
-        
-        res.status(200).json(result)
-    }).catch((err) => {
-        console.log(err);
-    });
+        .then((result) => {
+            console.log('res from user add');
+
+            res.status(200).json(result)
+        }).catch((err) => {
+            console.log(err);
+        });
 });
-  // url parameter
+// url parameter
 router.get('/getbycity/:city', (req, res) => {
     Model.find({ city: req.params.city })
         .then((result) => {
@@ -70,5 +71,35 @@ router.delete('/delete/:id', (req, res) => {
         });
 });
 
+router.post('/authenticate', (req, res) => {
+    Model.findOne(req.body)
+        .then((result) => {
+            if (result) {
+                //email and password matched
+                //generate token
 
+                const { _id, email, password } = result;
+                const payload = { _id, email, password }
+
+                jwt.sign(
+                    payload,
+                    process.env.JWT_SECRET,
+                    {
+                        expiresIn: '6h'
+                    },
+                    (err, token) => {
+                        if (err) {
+                            console.log(err);
+                            res.status(500).json(err);
+                        } else {
+                            res.status(200).json({ token });
+                        }
+                    }
+                )
+            }
+        }).catch((err) => {
+            console.log(err);
+            res.status(500).json(err)
+        })
+});
 module.exports = router;

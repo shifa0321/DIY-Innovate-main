@@ -39,7 +39,7 @@ const Login = () => {
 
         const data = await response.json();
         // Handle successful login (e.g., save token, redirect)
-        router.push('/dashboard'); // Redirect to dashboard or home page
+        router.push('/'); // Redirect to dashboard or home page
       } catch (err) {
         setError(err.message);
       }
@@ -71,7 +71,6 @@ const Login = () => {
               </label>
               <input
                 id="email"
-                name="email"
                 type="email"
                 autoComplete="email"
                 required
@@ -93,7 +92,6 @@ const Login = () => {
               </label>
               <input
                 id="password"
-                name="password"
                 type="password"
                 autoComplete="current-password"
                 required
@@ -115,7 +113,6 @@ const Login = () => {
             <div className="flex items-center">
               <input
                 id="remember-me"
-                name="remember-me"
                 type="checkbox"
                 className="h-4 w-4 text-blue-600 focus:ring-blue-500 border-gray-300 rounded"
               />
