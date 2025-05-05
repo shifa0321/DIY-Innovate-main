@@ -9,7 +9,6 @@ const Layout = ({ children }) => {
             <Toaster/>
             <Navbar />
             {children}
-            <Footer/>
         </>
     )
 }

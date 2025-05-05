@@ -172,6 +172,7 @@
 
 // export default Navbar;
 
+import Link from 'next/link';
 import React from 'react';
 
 const Navbar = () => {
@@ -189,7 +190,7 @@ const Navbar = () => {
             <a href="/about" className="text-gray-700 hover:text-indigo-600 transition duration-200">About</a>
           </li>
           <li>
-            <a href="/browse" className="text-gray-700 hover:text-indigo-600 transition duration-200">Browse</a>
+            <Link href="/browse-product" className="text-gray-700 hover:text-indigo-600 transition duration-200">Browse</Link>
           </li>
           <li>
             <a href="#" className="text-gray-700 hover:text-indigo-600 transition duration-200">Shop</a>

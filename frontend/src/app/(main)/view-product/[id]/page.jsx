@@ -43,6 +43,7 @@ const ViewProduct = ({ params }) => {
           alt={product.title}
           className="w-full h-64 object-cover rounded-md mb-6"
         />
+        <video src={product.videoUrl} controls muted autoplay loop></video>
         <h2 className="text-2xl font-semibold mb-4">{product.title}</h2>
         <p className="text-gray-700 mb-4">{product.description}</p>
         <p className="text-blue-500 font-bold mb-2">Price: ${product.price}</p>

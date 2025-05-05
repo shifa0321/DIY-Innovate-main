@@ -15,7 +15,7 @@ const Navbar = () => {
           <li><a href="/dashboard" className="hover:text-[#E76F51]">Dashboard</a></li>
           <li><a href="/manage-users" className="hover:text-[#E76F51]">Users</a></li>
           <li><a href="/manage-sellers" className="hover:text-[#E76F51]">Sellers</a></li>
-          <li><a href="/manage-products" className="hover:text-[#E76F51]">Products</a></li>
+          <li><a href="/browse-products" className="hover:text-[#E76F51]">Products</a></li>
           <li><a href="/settings" className="hover:text-[#E76F51]">Settings</a></li>
         </ul>
 
