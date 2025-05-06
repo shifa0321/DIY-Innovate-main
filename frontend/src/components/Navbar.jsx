@@ -171,11 +171,29 @@
 // }
 
 // export default Navbar;
-
+"use client"
 import Link from 'next/link';
-import React from 'react';
+import React, { useEffect, useState } from 'react';
 
 const Navbar = () => {
+
+  //code to check if user is logged in
+  const [isLoggedIn, setIsLoggedIn] = useState(false);
+  useEffect(() => {
+    const token = localStorage.getItem('token');
+    if (token) {
+      setIsLoggedIn(true);
+    } else {
+      setIsLoggedIn(false);
+    }
+  }, []);
+
+  const handleLogout = () => {
+    localStorage.removeItem('token');
+    setIsLoggedIn(false);
+  }
+
+
   return (
     <nav className="bg-white shadow-md sticky top-0 z-50">
       <div className="max-w-7xl mx-auto px-4 py-3 flex items-center justify-between">
@@ -196,14 +214,29 @@ const Navbar = () => {
             <a href="/user/checkout" className="text-gray-700 hover:text-indigo-600 transition duration-200">Shop</a>
           </li>
         </ul>
-        <div className="flex space-x-4">
-          <button className="bg-indigo-600 text-white px-4 py-2 rounded-xl hover:bg-indigo-700 transition">
-            Login
-          </button>
-          <button className="border border-indigo-600 text-indigo-600 px-4 py-2 rounded-xl hover:bg-indigo-50 transition">
-            Sign Up
-          </button>
-        </div>
+
+        {isLoggedIn ? (
+          <Link href="/login">
+            <button className="bg-indigo-600 text-white px-4 py-2 rounded-xl hover:bg-indigo-700 transition"
+              onClick={handleLogout}>
+              Logout
+            </button>
+          </Link>
+        ) : (
+          <div className="flex space-x-4">
+            <Link href="/login">
+              <button className="bg-indigo-600 text-white px-4 py-2 rounded-xl hover:bg-indigo-700 transition">
+                Login
+              </button>
+            </Link>
+            <Link href="signup">
+              <button className="border border-indigo-600 text-indigo-600 px-4 py-2 rounded-xl hover:bg-indigo-50 transition">
+                Sign Up
+              </button>
+            </Link>
+          </div>
+        )}
+
       </div>
     </nav>
   );

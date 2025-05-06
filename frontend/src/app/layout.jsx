@@ -2,7 +2,7 @@ import { Geist, Geist_Mono } from "next/font/google";
 import { Toaster } from "react-hot-toast";
 import "./globals.css";
 import PrelineScript from "@/components/PrelineScript";
-import Navbar from "@/app/(main)/Navbar";
+import Navbar from "@/components/Navbar";
 import Footer from "@/components/Footer";
 import { CartProvider } from "@/context/CartContext";
 
@@ -30,7 +30,6 @@ export default function RootLayout({ children }) {
         <PrelineScript />
         <Toaster />
         <CartProvider>
-          {/* <Navbar /> */}
           {children}
           <Footer />
         </CartProvider>

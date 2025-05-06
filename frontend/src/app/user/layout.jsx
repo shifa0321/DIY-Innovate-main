@@ -1,5 +1,5 @@
 import React from 'react';
-import Navbar from './Navbar';
+import Navbar from '../../components/Navbar';
 import Footer from '@/components/Footer';
 import { Toaster } from 'react-hot-toast';
 
@@ -13,7 +13,6 @@ const Layout = ({ children }) => {
                     {children}
                 </div>
             </main>
-            <Footer />
         </div>
     );
 };

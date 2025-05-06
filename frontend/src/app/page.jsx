@@ -1,12 +1,12 @@
 import React from 'react';
-import Navbar from './(main)/Navbar';
 import Link from 'next/link';
+import Navbar from '@/components/Navbar';
 
 const Home = () => {
   return (
+    
     <div className="min-h-screen">
-      <Navbar />
-
+      <Navbar/>
       {/* Hero Section */}
       <div className="bg-gradient-to-r from-indigo-50 to-indigo-100 py-16">
         <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
